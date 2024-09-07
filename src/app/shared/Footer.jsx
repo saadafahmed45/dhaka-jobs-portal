@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -8,13 +9,10 @@ const Footer = () => {
           <div className="lg:flex">
             <div className="w-full -mx-6 lg:w-2/5">
               <div className="px-6">
-                <a href="#">
-                  <img
-                    className="w-auto h-7"
-                    src="https://merakiui.com/images/full-logo.svg"
-                    alt=""
-                  />
-                </a>
+                <Link href={"/"} className="text-2xl font-bold text-slate-800">
+                  Dhaka /<span className="text-blue-700">Jobs</span>
+                  <span className="text-[12px]">.com</span>
+                </Link>
 
                 <p className="max-w-sm mt-2 text-gray-500 ">
                   Join 31,000+ other and never miss out on new tips, tutorials,
