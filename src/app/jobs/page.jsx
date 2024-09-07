@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import SectionHeader from "./SectionHeader";
-import Job from "./JobCard";
+import JobCard from "../components/JobCard";
+import SectionHeader from "../components/SectionHeader";
 
-const FutureJob = () => {
+const Jobs = () => {
   const [jobs, setJobs] = useState([]);
 
   const [dataLength, setDataLength] = useState(4);
@@ -24,7 +24,7 @@ const FutureJob = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
         {jobs.slice(0, dataLength).map((job) => (
-          <Job job={job} key={job.id} />
+          <JobCard job={job} key={job.id} />
         ))}
       </div>
       <div className="text-center">
@@ -45,4 +45,4 @@ const FutureJob = () => {
   );
 };
 
-export default FutureJob;
+export default Jobs;

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 function Navbar() {
@@ -16,9 +17,10 @@ function Navbar() {
         <div className="container px-6 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
-              <a className="text-2xl font-bold text-slate-800" href="#">
-                Dhaka-Jobs
-              </a>
+              <Link href={"/"} className="text-2xl font-bold text-slate-800">
+                Dhaka /<span className="text-blue-700">Jobs</span>
+                <span className="text-[12px]">.com</span>
+              </Link>
               {/* mobile nav btn  */}
               <div className="flex lg:hidden">
                 <button
@@ -73,18 +75,30 @@ function Navbar() {
             >
               {/* <div  className="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"> */}
               <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                <a
-                  href="#"
+                <Link
+                  href={"/jobs"}
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                >
+                  Home
+                </Link>
+                <Link
+                  href={"/"}
                   className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Find Work
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  href={"/jobs"}
                   className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
-                  Hire a freelancer
-                </a>
+                  Applied Jobs
+                </Link>
+                <Link
+                  href={"/jobs"}
+                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                >
+                  Blog
+                </Link>
               </div>
 
               <div className="flex items-center mt-4 lg:mt-0">

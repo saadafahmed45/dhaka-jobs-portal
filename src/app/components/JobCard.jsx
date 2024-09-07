@@ -1,9 +1,11 @@
 import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineDollar } from "react-icons/ai";
+import Link from "next/link";
 
-const Job = ({ job }) => {
+const JobCard = ({ job }) => {
   const {
+    id,
     logo,
     job_title,
     job_description,
@@ -50,12 +52,15 @@ const Job = ({ job }) => {
           </h3>
         </div>
         {/* btn  */}
-        <button className="btn bg-blue-700 text-white hover:text-blue-700 hover:bg-white">
+        <Link
+          href={`/jobs/${id}`}
+          className="btn bg-blue-700 text-white hover:text-blue-700 hover:bg-white"
+        >
           View Details
-        </button>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Job;
+export default JobCard;
