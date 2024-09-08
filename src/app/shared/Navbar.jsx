@@ -88,7 +88,7 @@ function Navbar() {
                   Find Work
                 </Link>
                 <Link
-                  href={"/applied"}
+                  href={"/appliedJobs"}
                   className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Applied Jobs

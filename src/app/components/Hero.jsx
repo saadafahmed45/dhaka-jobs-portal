@@ -3,11 +3,11 @@ import React from "react";
 const Hero = () => {
   return (
     <div>
-      <div className="container px-6 py-16 mx-auto">
+      <div className="container px-8 py-16 mx-auto">
         <div className="items-center lg:flex">
           <div className="w-full lg:w-1/2">
             <div className="lg:max-w-lg">
-              <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">
+              <h1 className="text-3xl font-bold text-gray-800  lg:text-5xl">
                 Best place to choose <br /> your{" "}
                 <span className="text-blue-500 ">Job</span>
               </h1>

@@ -15,6 +15,7 @@ const JobDetails = ({ params }) => {
       .then((data) => setJobs(data));
   }, []);
   const idInt = parseInt(id);
+
   const jobSingle = jobs.find((job) => job.id === idInt);
   console.log(jobs);
   // console.log("single jobs", jobSingle);
@@ -34,7 +35,7 @@ const JobDetails = ({ params }) => {
   // } = job;
 
   const handleApplyJob = () => {
-    saveJobApplication(id);
+    saveJobApplication(idInt);
     toast.success("Apply the Job", {
       position: "top-right",
       autoClose: 5000,
