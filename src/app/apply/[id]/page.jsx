@@ -30,7 +30,7 @@ const ApplyJob = ({ params }) => {
     console.log(appliedData);
 
     // Post the data to the server
-    fetch("http://localhost:5000/applied", {
+    fetch("https://dhaka-jobs-server.onrender.com/applied", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
