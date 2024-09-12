@@ -2,11 +2,14 @@
 import SectionHeader from "@/app/components/SectionHeader";
 import { saveJobApplication } from "@/app/utility/localStorage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDollar } from "react-icons/ai";
 import { Bounce, toast } from "react-toastify";
 
 const JobDetails = ({ params }) => {
+  const router = useRouter();
+
   const id = params.id;
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
@@ -17,36 +20,15 @@ const JobDetails = ({ params }) => {
   const idInt = parseInt(id);
 
   const jobSingle = jobs.find((job) => job.id === idInt);
-  console.log(jobs);
+  // console.log(jobs);
   // console.log("single jobs", jobSingle);
-  // const {
-  //   logo,
-  //   job_title,
-  //   job_description,
-  //   company_name,
-  //   salary,
-  //   location,
-  //   job_type,
-  //   remote_or_onsite,
-  //   experiences,
-  //   educational_requirements,
-  // job_responsibility,
-  // contact_information,
-  // } = job;
 
   const handleApplyJob = () => {
-    saveJobApplication(idInt);
-    toast.success("Apply the Job", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    // Save the job application (could be localStorage or any state)
+    // saveJobApplication(idInt);
+
+    // Redirect to the application page with the job ID
+    router.push(`/apply/${idInt}`);
   };
   return (
     <div className="px-6 py-4 lg:px-24 md:py-12">
