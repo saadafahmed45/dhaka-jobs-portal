@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 const ApplyJob = ({ params }) => {
   const id = params.id;
 
@@ -64,7 +64,7 @@ const ApplyJob = ({ params }) => {
   };
 
   return (
-    <div className=" py-8 px-16 ">
+    <div className=" py-8 px-6 md:px-16 ">
       <div className="flex justify-center items-center space-y-4 py-4">
         <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md ">
           <div className="mt-2">
@@ -86,7 +86,7 @@ const ApplyJob = ({ params }) => {
               tabIndex="0"
               role="link"
             >
-              Read more
+              {jobSingle?.salary}
             </a>
 
             <div className="flex items-center">
@@ -100,7 +100,7 @@ const ApplyJob = ({ params }) => {
                 tabIndex="0"
                 role="link"
               >
-                Khatab wedaa
+                {jobSingle?.contact_information.email}
               </a>
             </div>
           </div>
@@ -119,7 +119,7 @@ const ApplyJob = ({ params }) => {
               placeholder="Title"
               id="job_title"
               type="text"
-              className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              className="block  w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
             />
           </div>
           {/* input section  start */}
@@ -132,7 +132,7 @@ const ApplyJob = ({ params }) => {
               placeholder="Title"
               id="job_title"
               type="email"
-              className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
             />
           </div>
           {/* btn */}
