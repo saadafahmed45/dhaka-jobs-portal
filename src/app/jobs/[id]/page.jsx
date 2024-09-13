@@ -31,8 +31,8 @@ const JobDetails = ({ params }) => {
     router.push(`/apply/${idInt}`);
   };
   return (
-    <div className="px-6 py-4 lg:px-24 md:py-12">
-      <SectionHeader sectionHeader="Job Details" />
+    <div className="px-6 py-4 lg:px-24 md:py-8">
+      {/* <SectionHeader sectionHeader="Job Details" /> */}
       <nav
         aria-label="breadcrumb"
         className="w-full p-4 dark:bg-gray-100 dark:text-gray-800"
@@ -61,7 +61,7 @@ const JobDetails = ({ params }) => {
               viewBox="0 0 32 32"
               aria-hidden="true"
               fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-400"
+              className="w-2 h-2 mt-1 transform rotate-90 fill-current "
             >
               <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
@@ -80,7 +80,7 @@ const JobDetails = ({ params }) => {
               viewBox="0 0 32 32"
               aria-hidden="true"
               fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current dark:text-gray-400"
+              className="w-2 h-2 mt-1 transform rotate-90 fill-current "
             >
               <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
@@ -97,8 +97,15 @@ const JobDetails = ({ params }) => {
       {/* <h1> JobDetails : {id}</h1> */}
       <div className="grid items-center  gap-4 md:grid-cols-4">
         {/* fast  */}
-        <div className="border col-span-3 p-8">
+        <div className=" col-span-3 p-4">
           <div className="space-y-6">
+            <div className="flex gap-4 shadow p-10 border-sm">
+              <img src={jobSingle?.logo} alt="" />
+              <div>
+                <h2 className="text-xl font-bold">{jobSingle?.company_name}</h2>
+                <h3> Lenovo pvt. ltd</h3>
+              </div>
+            </div>
             <h3>
               <span className="font-bold ">Job Description:</span>{" "}
               {jobSingle?.job_description}
