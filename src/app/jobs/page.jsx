@@ -21,17 +21,17 @@ const Jobs = () => {
     setLoader(false);
   }, []);
   // console.log(jobs);
-  if (loader === true) {
-    return (
-      <div className="py-10">
-        <SectionHeader
-          sectionHeader="Future Jobs"
-          sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
-        />
-        <SkeletonCard />
-      </div>
-    );
-  }
+  // if (loader === true) {
+  //   return (
+  //     <div className="py-10">
+  //       <SectionHeader
+  //         sectionHeader="Future Jobs"
+  //         sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
+  //       />
+  //       <SkeletonCard />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="px-8 md:px-24 py-10 space-y-4">
       <SectionHeader
