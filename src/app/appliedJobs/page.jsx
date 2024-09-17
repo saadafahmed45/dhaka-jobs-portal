@@ -5,7 +5,7 @@ import SectionHeader from "../components/SectionHeader";
 const AppliedJobs = () => {
   const [appliedJob, setAppliedJob] = useState([]);
   useEffect(() => {
-    fetch(`https://dhaka-job-portal-server.vercel.app/applied`)
+    fetch(`https://dhaka-jobs-server.onrender.com/applied`)
       .then((res) => res.json())
       .then((data) => setAppliedJob(data));
   }, []);

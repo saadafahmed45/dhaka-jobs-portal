@@ -15,7 +15,7 @@ const Jobs = () => {
 
   useEffect(() => {
     // fetch("/data/jobs.json")
-    fetch(`https://dhaka-job-portal-server.vercel.app/jobs`)
+    fetch(`https://dhaka-jobs-server.onrender.com/jobs`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
     setLoader(false);
@@ -23,9 +23,8 @@ const Jobs = () => {
   // console.log(jobs);
   if (loader === true) {
     return (
-      <div  className="py-10">
+      <div className="py-10">
         <SectionHeader
-         
           sectionHeader="Future Jobs"
           sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
         />

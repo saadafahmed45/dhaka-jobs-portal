@@ -23,7 +23,7 @@ const JobCard = ({ job }) => {
     <motion.div
       initial={{ opacity: 0 }} // Starting state for opacity
       animate={{ opacity: 1 }} // Ending state for opacity
-      transition={{ duration: 1 }} // Duration of the animation
+      transition={{ duration: 0.5 }} // Duration of the animation
     >
       <div className="shadow-sm p-6 border rounded-lg space-y-3">
         <img
