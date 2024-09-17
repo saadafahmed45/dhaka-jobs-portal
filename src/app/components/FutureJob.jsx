@@ -27,7 +27,7 @@ const FutureJob = () => {
           <Job job={job} key={job.id} />
         ))}
       </div>
-      <div className="text-center">
+      <div className="text-center ">
         <button
           onClick={() => setDataLength(jobs.length)}
           className={

@@ -13,15 +13,32 @@ const JobDetails = ({ params }) => {
   const id = params.id;
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
-    fetch(`/data/jobs.json/`)
+    fetch(`https://dhaka-job-portal-server.vercel.app/jobs/${id}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, []);
-  const idInt = parseInt(id);
 
-  const jobSingle = jobs.find((job) => job.id === idInt);
+  const {
+    _id,
+    job_title,
+    job_description,
+    company_name,
+    salary,
+    location,
+    job_type,
+    remote_or_onsite,
+    experiences,
+    educational_requirements,
+    company_logo_link,
+    job_responsibility,
+    contact_information,
+  } = jobs;
+
+  // const idInt = parseInt(id);
+
+  // const jobs = jobs.find((job) => job.id === idInt);
   // console.log(jobs);
-  // console.log("single jobs", jobSingle);
+  // console.log("single jobs", jobs);
 
   const handleApplyJob = () => {
     // Save the job application (could be localStorage or any state)
@@ -30,6 +47,7 @@ const JobDetails = ({ params }) => {
     // Redirect to the application page with the job ID
     router.push(`/apply/${idInt}`);
   };
+
   return (
     <div className="px-6 py-4 lg:px-24 md:py-8">
       {/* <SectionHeader sectionHeader="Job Details" /> */}
@@ -100,27 +118,27 @@ const JobDetails = ({ params }) => {
         <div className=" col-span-3 p-4">
           <div className="space-y-6">
             <div className="flex gap-4 shadow p-10 border-sm">
-              <img src={jobSingle?.logo} alt="" />
+              <img className="w-1/3" src={company_logo_link} alt="" />
               <div>
-                <h2 className="text-xl font-bold">{jobSingle?.company_name}</h2>
+                <h2 className="text-xl font-bold">{company_name}</h2>
                 <h3> Lenovo pvt. ltd</h3>
               </div>
             </div>
             <h3>
               <span className="font-bold ">Job Description:</span>{" "}
-              {jobSingle?.job_description}
+              {job_description}
             </h3>
             <h3>
               <span className="font-bold ">Job Responsibility:</span>{" "}
-              {jobSingle?.job_responsibility}
+              {job_responsibility}
             </h3>
             <div className="py-4 space-y-2">
               <h3 className="font-bold ">Educational Requirements </h3>
-              <span>{jobSingle?.educational_requirements}</span>
+              <span>{educational_requirements}</span>
             </div>
             <div className=" space-y-2">
               <h3 className="font-bold ">Experiences </h3>
-              <span>{jobSingle?.experiences}</span>
+              <span>{experiences}</span>
             </div>
           </div>
         </div>
@@ -138,7 +156,7 @@ const JobDetails = ({ params }) => {
               </span>
               <h3>
                 {" "}
-                <span className="font-bold">Salary:</span> {jobSingle?.salary}
+                <span className="font-bold">Salary:</span> {salary}
               </h3>
             </div>
 
@@ -149,8 +167,7 @@ const JobDetails = ({ params }) => {
               </span>
               <h3>
                 {" "}
-                <span className="font-bold">Job Title:</span>{" "}
-                {jobSingle?.job_title}
+                <span className="font-bold">Job Title:</span> {job_title}
               </h3>
             </div>
           </div>
@@ -159,7 +176,7 @@ const JobDetails = ({ params }) => {
 
           <div className=" space-y-2 p-4">
             <div className="border-b border-blue-500 py-2 ">
-              <h3 className="font-bold text-md">Contact Information:</h3>
+              4<h3 className="font-bold text-md">Contact Information:</h3>
             </div>
 
             <div className="flex items-center gap-1">
@@ -170,7 +187,7 @@ const JobDetails = ({ params }) => {
               <h3>
                 {" "}
                 <span className="font-bold">Phone:</span>{" "}
-                {jobSingle?.contact_information.phone}
+                {contact_information?.phone}
               </h3>
             </div>
             <div className="flex items-center gap-1">
@@ -181,7 +198,7 @@ const JobDetails = ({ params }) => {
               <h3>
                 {" "}
                 <span className="font-bold">Email:</span>{" "}
-                {jobSingle?.contact_information.email}
+                {contact_information?.email}
               </h3>
             </div>
             <div className="flex items-center content-center  gap-1 ">
@@ -192,7 +209,7 @@ const JobDetails = ({ params }) => {
               <h3>
                 {" "}
                 <span className="font-bold">Job Title:</span>{" "}
-                {jobSingle?.contact_information.address}
+                {contact_information?.address}
               </h3>
             </div>
           </div>

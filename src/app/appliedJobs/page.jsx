@@ -1,34 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SectionHeader from "../components/SectionHeader";
-import { getStoredJobApplication } from "../utility/localStorage";
 
 const AppliedJobs = () => {
-  const [jobs, setJobs] = useState([]);
+  const [appliedJob, setAppliedJob] = useState([]);
   useEffect(() => {
-    fetch(`/data/jobs.json/`)
+    fetch(`https://dhaka-job-portal-server.vercel.app/applied`)
       .then((res) => res.json())
-      .then((data) => setJobs(data));
+      .then((data) => setAppliedJob(data));
   }, []);
-
-  useEffect(() => {
-    const storeJobsIds = getStoredJobApplication();
-    if (jobs.length > 0) {
-      //   const appliedJobs = jobs.filter((job) => storeJobsIds.includes(job.id));
-      //   console.log(jobs, storeJobsIds, appliedJobs);
-      const jobsApplied = [];
-      for (const id of storeJobsIds) {
-        const job = jobs.find((job) => job.id === id);
-        if (job) {
-          jobsApplied.push(job);
-        }
-      }
-      console.log(jobs, jobsApplied, storeJobsIds);
-    }
-  }, []);
+  const {
+    _id,
+    job_title,
+    job_description,
+    company_name,
+    salary,
+    location,
+    job_type,
+    remote_or_onsite,
+    experiences,
+    educational_requirements,
+    company_logo_link,
+  } = appliedJob;
 
   return (
-    <div className="px-16 md:24 ">
+    <div className="px-12 md:24 ">
       <div>
         <SectionHeader sectionHeader="Applied Jobs" />
       </div>
@@ -54,22 +50,33 @@ const AppliedJobs = () => {
           </ul>
         </div>
       </div>
-      <div>
-        <div className="card card-side bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-              alt="Movie"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">New movie is released!</h2>
-            <p>Click the button to watch on Jetflix app.</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Watch</button>
+      <div className="space-y-4">
+        {appliedJob.map((job) => (
+          <div
+            key={appliedJob._id}
+            className="card flex card-side bg-base-100 shadow-xl "
+          >
+            <div className="card-body ">
+              <div className="flex justify-between flex-col md:flex-row">
+                <div>
+                  <h3 className="text-xl">{job.jobData.company_name}</h3>
+                  <h2 className="card-title">{job.jobData.job_title}</h2>
+                  <h3> {job.jobData.job_type}</h3>
+                  <div className="flex gap-6">
+                    <h3> {job.jobData.location}</h3>
+                    <h3> {job.jobData.remote_or_onsite}</h3>
+                    <h3> {job.jobData.salary}</h3>
+                  </div>
+                </div>
+                <div className=" ">
+                  <h3> {job.appliedContact.name}</h3>
+                  <h3> {job.appliedContact.email}</h3>
+                  <button className="btn btn-primary"> download CV</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

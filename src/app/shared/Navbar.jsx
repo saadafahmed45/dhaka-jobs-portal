@@ -14,7 +14,7 @@ function Navbar() {
         // x-data="{ isOpen: false }"
         className="relative bg-white shadow "
       >
-        <div className="container px-6 py-4 mx-auto">
+        <div className="container px-6 md:px-12 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
               <Link href={"/"} className="text-2xl font-bold text-slate-800">
@@ -74,28 +74,28 @@ function Navbar() {
               }`}
             >
               {/* <div  className="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"> */}
-              <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+              <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8 font-semibold">
                 <Link
                   href={"/"}
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                  className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Home
                 </Link>
                 <Link
                   href={"/jobs"}
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                  className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Find Work
                 </Link>
                 <Link
                   href={"/appliedJobs"}
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                  className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Applied Jobs
                 </Link>
                 <Link
                   href={"/postJobs"}
-                  className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                  className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
                   Post a job
                 </Link>
@@ -103,7 +103,7 @@ function Navbar() {
 
               <div className="flex items-center mt-4 lg:mt-0">
                 <button
-                  className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block  hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
+                  className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block  hover:text-gray-800 dark:hover:text-gray-400 focus:text-gray-800 dark:focus:text-gray-400 focus:outline-none"
                   aria-label="show notifications"
                 >
                   <svg
@@ -135,7 +135,7 @@ function Navbar() {
                     />
                   </div>
 
-                  <h3 className="mx-2 text-gray-700  lg:hidden">
+                  <h3 className="mx-2 text-gray-800  lg:hidden">
                     Khatab wedaadfds
                   </h3>
                 </button>

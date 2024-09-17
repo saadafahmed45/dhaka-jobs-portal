@@ -20,7 +20,7 @@ const PostJobs = () => {
     console.log(jobData);
 
     // Post the data to the server
-    fetch("http://localhost:5000/jobs", {
+    fetch("https://dhaka-job-portal-server.vercel.app/jobs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +39,7 @@ const PostJobs = () => {
       .catch((error) => {
         console.error("Error adding job:", error);
       });
+    alert("posted");
   };
 
   return (
