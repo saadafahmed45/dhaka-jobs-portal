@@ -53,7 +53,7 @@ const AppliedJobs = () => {
       <div className="space-y-4">
         {appliedJob.map((job) => (
           <div
-            key={appliedJob._id}
+            key={_id}
             className="card flex card-side bg-base-100 shadow-xl "
           >
             <div className="card-body ">

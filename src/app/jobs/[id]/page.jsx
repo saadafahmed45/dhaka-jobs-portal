@@ -45,7 +45,7 @@ const JobDetails = ({ params }) => {
     // saveJobApplication(idInt);
 
     // Redirect to the application page with the job ID
-    router.push(`/apply/${idInt}`);
+    router.push(`/apply/${_id}`);
   };
 
   return (

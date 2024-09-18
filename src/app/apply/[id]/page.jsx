@@ -6,17 +6,17 @@ import { Bounce, toast } from "react-toastify";
 const ApplyJob = ({ params }) => {
   const id = params.id;
 
-  const [jobs, setJobs] = useState([]);
+  const [jobSingle, setJobs] = useState([]);
   useEffect(() => {
-    fetch(`/data/jobs.json/`)
+    fetch(`https://dhaka-job-portal-server.vercel.app/jobs/${id}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, []);
-  const idInt = parseInt(id);
+  // const idInt = parseInt(id);
 
-  const jobSingle = jobs.find((job) => job.id === idInt);
+  // const jobSingle = jobs.find((job) => job.id === idInt);
 
-  console.log(jobSingle);
+  // console.log(jobSingle);
 
   const { register, handleSubmit } = useForm();
 
@@ -100,7 +100,7 @@ const ApplyJob = ({ params }) => {
                 tabIndex="0"
                 role="link"
               >
-                {jobSingle?.contact_information.email}
+                {/* {jobSingle?.contact_information.email} */}
               </a>
             </div>
           </div>
