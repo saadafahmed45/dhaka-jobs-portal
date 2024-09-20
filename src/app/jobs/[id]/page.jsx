@@ -1,5 +1,6 @@
 "use client";
 import SectionHeader from "@/app/components/SectionHeader";
+import SkeletonCard from "@/app/components/SkeletonCard";
 import { saveJobApplication } from "@/app/utility/localStorage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,11 +13,36 @@ const JobDetails = ({ params }) => {
 
   const id = params.id;
   const [jobs, setJobs] = useState([]);
+  const [loader, setLoader] = useState(true);
+
   useEffect(() => {
-    fetch(`https://dhaka-job-portal-server.vercel.app/jobs/${id}`)
+    fetch(`https://dhaka-jobs-server.onrender.com/jobs/${id}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
+    setLoader(false);
   }, []);
+
+  if (loader === true) {
+    return (
+      <div className="py-24 p-16">
+        <div className="py-4 rounded shadow-lg w-full px-12   animate-pulse dark:bg-gray-50">
+          <div className="flex p-4 space-x-4 sm:px-8">
+            <div className="flex-shrink-0 w-36 h-36 rounded-full dark:bg-gray-300"></div>
+            <div className="flex-1 py-2 space-y-4">
+              <div className="w-full h-12 rounded dark:bg-gray-300"></div>
+              <div className="w-5/6 h-8 rounded dark:bg-gray-300"></div>
+            </div>
+          </div>
+          <div className="p-4 space-y-4 sm:px-8">
+            <div className="w-full h-6 rounded dark:bg-gray-300"></div>
+            <div className="w-full h-4 rounded dark:bg-gray-300"></div>
+            <div className="w-full h-4 rounded dark:bg-gray-300"></div>
+            <div className="w-3/4 h-4 rounded dark:bg-gray-300"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const {
     _id,
@@ -33,12 +59,6 @@ const JobDetails = ({ params }) => {
     job_responsibility,
     contact_information,
   } = jobs;
-
-  // const idInt = parseInt(id);
-
-  // const jobs = jobs.find((job) => job.id === idInt);
-  // console.log(jobs);
-  // console.log("single jobs", jobs);
 
   const handleApplyJob = () => {
     // Save the job application (could be localStorage or any state)
