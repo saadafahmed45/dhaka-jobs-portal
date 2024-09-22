@@ -1,10 +1,8 @@
 // "use client";
-
 import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineDollar } from "react-icons/ai";
 import Link from "next/link";
-// import { motion } from "framer-motion";
 
 const JobCard = ({ job }) => {
   const {
@@ -22,12 +20,7 @@ const JobCard = ({ job }) => {
   } = job;
 
   return (
-    <div
-      key={_id}
-      // initial={{ opacity: 0 }} // Starting state for opacity
-      // animate={{ opacity: 1 }} // Ending state for opacity
-      // transition={{ duration: 0.5 }} // Duration of the animation
-    >
+    <div>
       <div className="shadow-sm p-6 border rounded-lg space-y-3">
         <img
           className="h-24 rounded w-1/2 object-contain object-center"

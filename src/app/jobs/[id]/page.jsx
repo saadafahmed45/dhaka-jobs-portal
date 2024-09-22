@@ -10,22 +10,33 @@ import { Bounce, toast } from "react-toastify";
 
 const JobDetails = ({ params }) => {
   const router = useRouter();
+  const { id } = params;
 
-  const id = params.id;
-  const [jobs, setJobs] = useState([]);
-  const [loader, setLoader] = useState(true);
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://dhaka-jobs-server.onrender.com/jobs/${id}`)
-      .then((res) => res.json())
-      .then((data) => setJobs(data));
-    setLoader(false);
-  }, []);
+    const fetchJobDetails = async () => {
+      try {
+        const response = await fetch(
+          `https://dhaka-jobs-server.onrender.com/jobs/${id}`
+        );
+        const data = await response.json();
+        setJob(data);
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (loader === true) {
+    fetchJobDetails();
+  }, [id]);
+
+  if (loading) {
     return (
       <div className="py-24 p-16">
-        <div className="py-4 rounded shadow-lg w-full px-12   animate-pulse dark:bg-gray-50">
+        <div className="py-4 rounded shadow-lg w-full px-12 animate-pulse dark:bg-gray-50">
           <div className="flex p-4 space-x-4 sm:px-8">
             <div className="flex-shrink-0 w-36 h-36 rounded-full dark:bg-gray-300"></div>
             <div className="flex-1 py-2 space-y-4">
@@ -44,45 +55,36 @@ const JobDetails = ({ params }) => {
     );
   }
 
+  if (!job) {
+    return <p>Job details not found.</p>;
+  }
+
   const {
     _id,
     job_title,
     job_description,
     company_name,
     salary,
-    location,
-    job_type,
-    remote_or_onsite,
-    experiences,
-    educational_requirements,
     company_logo_link,
     job_responsibility,
+    experiences,
+    educational_requirements,
     contact_information,
-  } = jobs;
+  } = job;
 
   const handleApplyJob = () => {
-    // Save the job application (could be localStorage or any state)
-    // saveJobApplication(idInt);
-
-    // Redirect to the application page with the job ID
     router.push(`/apply/${_id}`);
   };
 
   return (
     <div className="px-6 py-4 lg:px-24 md:py-8">
-      {/* <SectionHeader sectionHeader="Job Details" /> */}
       <nav
         aria-label="breadcrumb"
         className="w-full p-4 dark:bg-gray-100 dark:text-gray-800"
       >
         <ol className="flex h-8 space-x-2">
           <li className="flex items-center">
-            <Link
-              href={"/"}
-              rel="noopener noreferrer"
-              title="Back to homepage"
-              className="hover:underline"
-            >
+            <Link href="/" title="Back to homepage" className="hover:underline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -97,144 +99,116 @@ const JobDetails = ({ params }) => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
-              aria-hidden="true"
               fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current "
+              className="w-2 h-2 mt-1 transform rotate-90 fill-current"
             >
               <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
             <Link
-              href={"/jobs"}
-              rel="noopener noreferrer"
+              href="/jobs"
               className="flex items-center px-1 capitalize hover:underline"
             >
               Jobs
             </Link>
           </li>
-
           <li className="flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
-              aria-hidden="true"
               fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current "
+              className="w-2 h-2 mt-1 transform rotate-90 fill-current"
             >
               <path d="M32 30.031h-32l16-28.061z"></path>
             </svg>
-            <Link
-              rel="noopener noreferrer"
-              href="#"
-              className="flex items-center px-1 capitalize underline  cursor-default"
-            >
+            <span className="flex items-center px-1 capitalize cursor-default">
               Job Details
-            </Link>
+            </span>
           </li>
         </ol>
       </nav>
-      {/* <h1> JobDetails : {id}</h1> */}
-      <div className="grid items-center  gap-4 md:grid-cols-4">
-        {/* fast  */}
-        <div className=" col-span-3 p-4">
+
+      <div className="grid items-center gap-4 md:grid-cols-4">
+        <div className="col-span-3 p-4">
           <div className="space-y-6">
             <div className="flex gap-4 shadow p-10 border-sm">
-              <img className="w-1/3" src={company_logo_link} alt="" />
+              <img
+                className="w-1/3"
+                src={company_logo_link}
+                alt={company_name}
+              />
               <div>
                 <h2 className="text-xl font-bold">{company_name}</h2>
-                <h3> Lenovo pvt. ltd</h3>
               </div>
             </div>
-            <h3>
-              <span className="font-bold ">Job Description:</span>{" "}
-              {job_description}
-            </h3>
-            <h3>
-              <span className="font-bold ">Job Responsibility:</span>{" "}
-              {job_responsibility}
-            </h3>
-            <div className="py-4 space-y-2">
-              <h3 className="font-bold ">Educational Requirements </h3>
-              <span>{educational_requirements}</span>
+            <div>
+              <h3 className="font-bold">Job Description:</h3> {job_description}
             </div>
-            <div className=" space-y-2">
-              <h3 className="font-bold ">Experiences </h3>
-              <span>{experiences}</span>
+            <div>
+              <h3 className="font-bold">Job Responsibility:</h3>{" "}
+              {job_responsibility}
+            </div>
+            <div>
+              <h3 className="font-bold">Educational Requirements:</h3>{" "}
+              {educational_requirements}
+            </div>
+            <div>
+              <h3 className="font-bold">Experiences:</h3> {experiences}
             </div>
           </div>
         </div>
-        {/* second  */}
-        <div className="border  col-span-3 md:col-span-1  p-4 bg-blue-200">
-          <div className=" space-y-2">
-            <div className="border-b border-blue-500 py-2 ">
+
+        <div className="border col-span-3 md:col-span-1 p-4 bg-blue-200">
+          <div className="space-y-2">
+            <div className="border-b border-blue-500 py-2">
               <h3 className="font-bold text-md">Job Details:</h3>
             </div>
-
             <div className="flex items-center gap-1">
-              <span>
-                {" "}
-                <AiOutlineDollar />
-              </span>
+              <AiOutlineDollar />
               <h3>
-                {" "}
                 <span className="font-bold">Salary:</span> {salary}
               </h3>
             </div>
-
-            <div className="flex items-center content-center  gap-1 ">
-              <span>
-                {" "}
-                <AiOutlineDollar />
-              </span>
+            <div className="flex items-center gap-1">
+              <AiOutlineDollar />
               <h3>
-                {" "}
                 <span className="font-bold">Job Title:</span> {job_title}
               </h3>
             </div>
           </div>
 
-          {/* contact  */}
-
-          <div className=" space-y-2 p-4">
-            <div className="border-b border-blue-500 py-2 ">
-              4<h3 className="font-bold text-md">Contact Information:</h3>
+          <div className="space-y-2 p-4">
+            <div className="border-b border-blue-500 py-2">
+              <h3 className="font-bold text-md">Contact Information:</h3>
             </div>
-
-            <div className="flex items-center gap-1">
-              <span>
-                {" "}
+            {contact_information?.phone && (
+              <div className="flex items-center gap-1">
                 <AiOutlineDollar />
-              </span>
-              <h3>
-                {" "}
-                <span className="font-bold">Phone:</span>{" "}
-                {contact_information?.phone}
-              </h3>
-            </div>
-            <div className="flex items-center gap-1">
-              <span>
-                {" "}
+                <h3>
+                  <span className="font-bold">Phone:</span>{" "}
+                  {contact_information.phone}
+                </h3>
+              </div>
+            )}
+            {contact_information?.email && (
+              <div className="flex items-center gap-1">
                 <AiOutlineDollar />
-              </span>
-              <h3>
-                {" "}
-                <span className="font-bold">Email:</span>{" "}
-                {contact_information?.email}
-              </h3>
-            </div>
-            <div className="flex items-center content-center  gap-1 ">
-              <span>
-                {" "}
+                <h3>
+                  <span className="font-bold">Email:</span>{" "}
+                  {contact_information.email}
+                </h3>
+              </div>
+            )}
+            {contact_information?.address && (
+              <div className="flex items-center gap-1">
                 <AiOutlineDollar />
-              </span>
-              <h3>
-                {" "}
-                <span className="font-bold">Job Title:</span>{" "}
-                {contact_information?.address}
-              </h3>
-            </div>
+                <h3>
+                  <span className="font-bold">Address:</span>{" "}
+                  {contact_information.address}
+                </h3>
+              </div>
+            )}
           </div>
           <button className="btn w-full btn-primary" onClick={handleApplyJob}>
-            {" "}
             Apply
           </button>
         </div>
