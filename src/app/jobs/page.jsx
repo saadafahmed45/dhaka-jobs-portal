@@ -1,39 +1,41 @@
-// "use client";
-
-// import React, { useEffect, useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import JobCard from "../components/JobCard";
 import SectionHeader from "../components/SectionHeader";
-import jobsDataLoad, { jobsApi } from "../api/jobsApi";
+// import jobsDataLoad, { jobsApi } from "../api/jobsApi";
 import SkeletonCard from "../components/SkeletonCard";
 
 const Jobs = async () => {
-  // const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
   // const [dataLength, setDataLength] = useState(6);
 
-  // const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(true);
 
-  // useEffect(() => {
-  //   // fetch("/data/jobs.json")
-  //   fetch(`https://dhaka-jobs-server.onrender.com/jobs`)
-  //     .then((res) => res.json())
-  //     .then((data) => setJobs(data));
-  //   setLoader(false);
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("https://dhaka-job-portal-server.vercel.app/jobs")
+      .then((res) => {
+        setJobs(res.data);
+        setLoader(false);
+      })
+      .catch((err) => console.error(err));
+  }, []);
   // console.log(jobs);
-  // if (loader === true) {
-  //   return (
-  //     <div className="py-10">
-  //       <SectionHeader
-  //         sectionHeader="Future Jobs"
-  //         sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
-  //       />
-  //       <SkeletonCard />
-  //     </div>
-  //   );
-  // }
+  if (loader == true) {
+    return (
+      <div className="py-10">
+        <SectionHeader
+          sectionHeader="Future Jobs"
+          sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
+        />
+        <SkeletonCard />
+      </div>
+    );
+  }
 
-  const jobs = await jobsDataLoad();
+  // const jobs = await jobsDataLoad();
   return (
     <div className="px-8 md:px-24 py-10 space-y-4">
       <SectionHeader

@@ -55,9 +55,9 @@ const JobDetails = ({ params }) => {
     );
   }
 
-  if (!job) {
-    return <p>Job details not found.</p>;
-  }
+  // if (!job) {
+  //   return <p>Job details not found.</p>;
+  // }
 
   const {
     _id,

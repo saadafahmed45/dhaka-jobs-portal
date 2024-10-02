@@ -3,6 +3,8 @@ import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineDollar } from "react-icons/ai";
 import Link from "next/link";
+import { MdOutlineArrowOutward } from "react-icons/md";
+import { BsBookmark } from "react-icons/bs";
 
 const JobCard = ({ job }) => {
   const {
@@ -22,13 +24,32 @@ const JobCard = ({ job }) => {
   return (
     <div>
       <div className="shadow-sm p-6 border rounded-lg space-y-3">
-        <img
-          className="h-24 rounded w-1/2 object-contain object-center"
-          src={company_logo_link}
-          alt="content"
-        />
-        <h2 className="text-lg text-gray-900 font-semibold">{job_title}</h2>
-        <h3 className="text-gray-600 text-md font-medium">{company_name}</h3>
+        <div className="flex justify-between items-center">
+          <img
+            className="h-24 rounded w-1/2 object-contain object-center"
+            src={company_logo_link}
+            alt="content"
+          />
+          <div className="flex gap-2">
+            <Link
+              href={`/jobs/${_id}`}
+              className=" text-[20px] p-2 outline-none shadow  bg-blue-200 text-blue-700 rounded-full  hover:bg-blue-700 hover:text-white"
+            >
+              <BsBookmark />
+            </Link>
+            <Link
+              href={`/jobs/${_id}`}
+              className=" text-[20px] p-2 outline-none shadow  bg-blue-200 text-blue-700 rounded-full  hover:bg-blue-700 hover:text-white"
+            >
+              <MdOutlineArrowOutward />
+            </Link>
+          </div>
+        </div>
+        <h3 className="text-gray-900 text-md font-medium">{company_name}</h3>
+        <h2 className="text-xl text-gray-900 font-semibold">{job_title}</h2>
+        <h2 className="text-md text-gray-600 font-semibold">
+          {job_description.slice(0, 50)}
+        </h2>
         {/* job type */}
         <div className="flex gap-4">
           <div className="badge text-blue-500 badge-outline">{job_type}</div>
@@ -52,12 +73,6 @@ const JobCard = ({ job }) => {
           </h3>
         </div>
         {/* button */}
-        <Link
-          href={`/jobs/${_id}`}
-          className="btn bg-blue-700 text-white hover:text-blue-700 hover:bg-white"
-        >
-          View Details
-        </Link>
       </div>
     </div>
   );
