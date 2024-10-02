@@ -1,4 +1,4 @@
-export const jobsApi = "https://dhaka-jobs-server.onrender.com/jobs";
+export const jobsApi = "https://dhaka-job-portal-server.vercel.app/jobs";
 
 async function jobsDataLoad() {
   const res = await fetch(jobsApi, {

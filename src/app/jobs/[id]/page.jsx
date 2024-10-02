@@ -19,7 +19,7 @@ const JobDetails = ({ params }) => {
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(
-          `https://dhaka-jobs-server.onrender.com/jobs/${id}`
+          `https://dhaka-job-portal-server.vercel.app/jobs/${id}`
         );
         const data = await response.json();
         setJob(data);

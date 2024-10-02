@@ -20,7 +20,7 @@ const PostJobs = () => {
     console.log(jobData);
 
     // Post the data to the server
-    fetch("https://dhaka-jobs-server.onrender.com/jobs", {
+    fetch("https://dhaka-job-portal-server.vercel.app/jobs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
