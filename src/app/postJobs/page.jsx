@@ -2,12 +2,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SectionHeader from "../components/SectionHeader";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const PostJobs = () => {
   const { register, handleSubmit } = useForm();
 
+  const imgbbApiKey = "7460ef8f44862495daa7f95295c4edcf";
+  const imageHostingApi = `https://api.imgbb.com/1/upload/key=7460ef8f44862495daa7f95295c4edcf`;
+
   // Function to handle form submission
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Convert minSalary and maxSalary to a single salary range field
     const salaryRange = `${data.minSalary}-${data.maxSalary}`;
 
@@ -17,29 +22,53 @@ const PostJobs = () => {
       ...rest,
       salary: salaryRange, // Add the combined salary range
     };
+
     console.log(jobData);
 
-    // Post the data to the server
-    fetch("https://dhaka-job-portal-server.vercel.app/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jobData),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
+    // img post
+
+    // Step 3: Handle image file upload to ImgBB (if an image is provided)
+    if (data.image && data.image[0]) {
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+
+      const imgResponse = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
+        formData
+      );
+
+      const imageUrl = imgResponse.data.data.url;
+      console.log("Image URL", imageUrl);
+
+      // Add image URL to job data
+      jobData.imageUrl = imageUrl;
+    }
+
+    // Post the data to the server using axios
+    axios
+      .post("https://dhaka-job-portal-server.vercel.app/jobs", jobData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        console.log("Post data", data);
+      .then((response) => {
+        console.log("Post data", response.data);
+        if (response.data.insertedId) {
+          Swal.fire({
+            title: "Your Job is Posted!",
+            // text: "You clicked the button!",
+            icon: "success",
+          });
+        }
       })
       .catch((error) => {
         console.error("Error adding job:", error);
+             Swal.fire({
+            title: "Oops...",
+            text: "Something went wrong!",
+            icon: "error",
+          });
       });
-    alert("posted");
   };
 
   return (
@@ -53,13 +82,14 @@ const PostJobs = () => {
             {/* input section  start */}
             <div>
               <label className="text-gray-700" htmlFor="job_title">
-                Job Title:
+                Job Title*:
               </label>
               <input
                 {...register("job_title")}
                 placeholder="Title"
                 id="job_title"
                 type="text"
+                required
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
@@ -72,6 +102,7 @@ const PostJobs = () => {
                 placeholder="Type here"
                 id="company_name"
                 type="text"
+                required
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
@@ -143,7 +174,6 @@ const PostJobs = () => {
                   type="text"
                   id="minSalary"
                   placeholder="22k"
-                  required
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                 />
               </div>
@@ -154,7 +184,6 @@ const PostJobs = () => {
                   type="text"
                   id="maxSalary"
                   placeholder="150k"
-                  required
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
                 />
               </div>
@@ -220,10 +249,10 @@ const PostJobs = () => {
                 Company Logo:
               </label>
               <input
-                {...register("company_logo_link")}
+                type="file"
+                {...register("image")}
                 placeholder="Type logo link"
                 id="text"
-                type="text"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
