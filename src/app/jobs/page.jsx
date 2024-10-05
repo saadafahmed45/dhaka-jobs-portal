@@ -15,7 +15,7 @@ const Jobs = async () => {
 
   useEffect(() => {
     axios
-      .get("https://dhaka-job-portal-server.vercel.app/jobs")
+      .get("https://dhaka-jobs-server.onrender.com/jobs")
       .then((res) => {
         setJobs(res.data);
         setLoader(false);

@@ -12,8 +12,8 @@ export default function Home() {
     <div>
       <Hero />
       <Ctg />
-      <Jobs />
       <CatagoryList />
+      <Jobs />
     </div>
   );
 }

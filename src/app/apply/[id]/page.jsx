@@ -8,7 +8,7 @@ const ApplyJob = ({ params }) => {
 
   const [jobSingle, setJobs] = useState([]);
   useEffect(() => {
-    fetch(`https://dhaka-job-portal-server.vercel.app/jobs/${id}`)
+    fetch(`https://dhaka-jobs-server.onrender.com/jobs/${id}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, []);

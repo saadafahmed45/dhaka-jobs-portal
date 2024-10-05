@@ -19,6 +19,7 @@ const JobCard = ({ job }) => {
     experiences,
     educational_requirements,
     company_logo_link,
+    imageUrl,
   } = job;
 
   return (
@@ -27,7 +28,7 @@ const JobCard = ({ job }) => {
         <div className="flex justify-between items-center">
           <img
             className="h-24 rounded w-1/2 object-contain object-center"
-            src={company_logo_link}
+            src={imageUrl}
             alt="content"
           />
           <div className="flex gap-2">

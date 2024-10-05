@@ -46,7 +46,7 @@ const PostJobs = () => {
 
     // Post the data to the server using axios
     axios
-      .post("https://dhaka-job-portal-server.vercel.app/jobs", jobData, {
+      .post("https://dhaka-jobs-server.onrender.com/jobs", jobData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,11 +63,11 @@ const PostJobs = () => {
       })
       .catch((error) => {
         console.error("Error adding job:", error);
-             Swal.fire({
-            title: "Oops...",
-            text: "Something went wrong!",
-            icon: "error",
-          });
+        Swal.fire({
+          title: "Oops...",
+          text: "Something went wrong!",
+          icon: "error",
+        });
       });
   };
 
