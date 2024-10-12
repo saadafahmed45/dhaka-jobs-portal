@@ -70,6 +70,7 @@ const JobDetails = ({ params }) => {
     experiences,
     educational_requirements,
     contact_information,
+    imageUrl,
   } = job;
 
   const handleApplyJob = () => {
@@ -130,12 +131,8 @@ const JobDetails = ({ params }) => {
       <div className="grid items-center gap-4 md:grid-cols-4">
         <div className="col-span-3 p-4">
           <div className="space-y-6">
-            <div className="flex gap-4 shadow p-10 border-sm">
-              <img
-                className="w-1/3"
-                src={company_logo_link}
-                alt={company_name}
-              />
+            <div className="flex gap-4 items-center shadow p-10 border-sm">
+              <img className="w-1/4" src={imageUrl} alt={company_name} />
               <div>
                 <h2 className="text-xl font-bold">{company_name}</h2>
               </div>

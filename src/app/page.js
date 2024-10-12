@@ -11,9 +11,9 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <Ctg />
       <CatagoryList />
       <Jobs />
+      <Ctg />
     </div>
   );
 }
