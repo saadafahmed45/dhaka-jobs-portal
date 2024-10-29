@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import CountUp from "react-countup";
 
 const Ctg = () => {
   return (
@@ -17,7 +19,8 @@ const Ctg = () => {
           <div className="w-full grid grid-cols-1 items-center mx-auto gap-6 md:grid-cols-2 lg:grid-cols-4 *:w-full *:col-span-1 *:bg-gray-100  *:px-6 *:py-12 *:rounded-lg *:text-center">
             <div>
               <h4 className="text-2xl text-blue-600 font-bold mb-2 lg:text-3xl">
-                500k+
+                {/* 500k+ */}
+                <CountUp start={0} end={500} duration={3.75} />+
               </h4>
               <p className="text-base font-medium text-gray-950 ">
                 Monthly Visitors
@@ -25,7 +28,8 @@ const Ctg = () => {
             </div>
             <div>
               <h4 className="text-2xl text-blue-600 font-bold mb-2 lg:text-3xl">
-                250k+
+                {/* 250k+ */}
+                <CountUp start={0} end={250} duration={4} />+
               </h4>
               <p className="text-base font-medium text-gray-950 ">
                 Registered Users
@@ -41,7 +45,8 @@ const Ctg = () => {
             </div>
             <div>
               <h4 className="text-2xl text-blue-600 font-bold mb-2 lg:text-3xl">
-                100k+
+                {/* 100k+ */}
+                <CountUp start={0} end={100} duration={5.2} />+
               </h4>
               <p className="text-base font-medium text-gray-950 ">
                 Email Subscribers

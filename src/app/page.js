@@ -6,13 +6,19 @@ import Hero from "./components/Hero";
 import JobsCatagory from "./jobs/page";
 import Jobs from "./jobs/page";
 import Ctg from "./components/ctg";
+import loading from "./loading";
+import { Suspense } from "react";
+import SearchJobs from "./components/SearchJobs";
 
 export default function Home() {
   return (
     <div>
       <Hero />
+      <SearchJobs />
       <CatagoryList />
-      <Jobs />
+      <Suspense fallback={<loading />}>
+        <Jobs />
+      </Suspense>
       <Ctg />
     </div>
   );
