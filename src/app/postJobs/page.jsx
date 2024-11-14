@@ -4,15 +4,24 @@ import { useForm } from "react-hook-form";
 import SectionHeader from "../components/SectionHeader";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const PostJobs = () => {
   const { register, handleSubmit } = useForm();
+  const [user, setUser] = useState(true); // Simulate user state (replace with actual auth check)
+  const router = useRouter(); // Initialize router for redirection
 
   const imgbbApiKey = "7460ef8f44862495daa7f95295c4edcf";
   const imageHostingApi = `https://api.imgbb.com/1/upload/key=7460ef8f44862495daa7f95295c4edcf`;
 
   // Function to handle form submission
   const onSubmit = async (data) => {
+
+    if (!user) {
+      // If the user is not logged in, redirect to login page
+      router.push("/login"); // Assuming '/login' is your login page route
+      return;
+    }
     // Convert minSalary and maxSalary to a single salary range field
     const salaryRange = `${data.minSalary}-${data.maxSalary}`;
 
@@ -52,6 +61,7 @@ const PostJobs = () => {
         },
       })
       .then((response) => {
+
         console.log("Post data", response.data);
         if (response.data.insertedId) {
           Swal.fire({
@@ -72,12 +82,15 @@ const PostJobs = () => {
   };
 
   return (
-    <div className="px-4 lg:px-24 py-8 bg-slate-200">
+    <div className="px-4 lg:px-24 py-8">
       <div>
         <SectionHeader sectionHeader={"Post a job"} />
       </div>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="  p-8 rounded-md shadow-lg">
+          <div>
+            <h2 className="text-lg font-bold pb-6"> Job Information:</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* input section  start */}
             <div>
@@ -149,8 +162,8 @@ const PostJobs = () => {
                 <option disabled value={"default"}>
                   Select a Catagory
                 </option>
-                <option value="Full Time">Full Time</option>
-                <option value="Part Time">Part Time</option>
+                <option value="Full Time">Full-Time</option>
+                <option value="Part Time">Part-Time</option>
               </select>
             </div>
             {/* experiences */}
@@ -287,7 +300,7 @@ const PostJobs = () => {
           </div>
           {/* btn */}
           <div className="mt-4">
-            <button className="bg-slate-400 btn btn-success" type="submit">
+            <button className=" btn text-white bg-blue-600 hover:bg-blue-700" type="submit">
               Post
             </button>
           </div>
