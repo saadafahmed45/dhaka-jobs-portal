@@ -6,23 +6,27 @@ import FindJob from "./find-job/page";
 import CatagoryList from "./components/CatagoryList";
 
 export default function Home() {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]); // State to hold all jobs
   const [quary, setQuary] = useState({
     jobTitle: "",
     location: "",
     jobType: "",
   });
-  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]); // State to hold filtered jobs
 
   // Fetch jobs on component mount
   useEffect(() => {
     axios
       .get("https://dhaka-jobs-server.onrender.com/jobs")
       .then((res) => {
-        setJobs(res.data);
-        setFilteredJobs(res.data); // Initially show all jobs
+        setJobs(res.data); // Store all jobs
+        setFilteredJobs(res.data); // Display all jobs initially
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setJobs([]); // If an error occurs, set jobs to an empty array
+        setFilteredJobs([]); // Ensure filtered jobs are also empty
+      });
   }, []);
 
   // Handle search input change

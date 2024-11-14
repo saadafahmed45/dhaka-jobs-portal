@@ -3,6 +3,17 @@ import SectionHeader from "../components/SectionHeader";
 import JobCard from "../components/JobCard";
 
 const FindJob = ({ jobs }) => {
+
+  if (!jobs || jobs.length === 0) {
+    return (
+      <div className="px-8 md:px-24 py-10">
+        <SectionHeader
+          sectionHeader="Find Jobs"
+          sectionPera="No jobs available at the moment. Please check back later."
+        />
+      </div>
+    );
+  }
   return (
     <div className="px-8 md:px-24 py-10 space-y-4">
       <SectionHeader
