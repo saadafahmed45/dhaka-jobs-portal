@@ -3,64 +3,59 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import JobCard from "../components/JobCard";
 import SectionHeader from "../components/SectionHeader";
-// import jobsDataLoad, { jobsApi } from "../api/jobsApi";
 import SkeletonCard from "../components/SkeletonCard";
 
-const Jobs = async () => {
+const Jobs = () => {
   const [jobs, setJobs] = useState([]);
-
-  // const [dataLength, setDataLength] = useState(6);
-
-  const [loader, setLoader] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://dhaka-jobs-server.onrender.com/jobs")
-      .then((res) => {
-        setJobs(res.data);
-        setLoader(false);
-      })
-      .catch((err) => console.error(err));
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get("https://dhaka-jobs-server.onrender.com/jobs");
+        setJobs(response.data);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
   }, []);
-  // console.log(jobs);
-  if (loader == true) {
+
+  if (loading) {
     return (
       <div className="py-10">
         <SectionHeader
           sectionHeader="Future Jobs"
-          sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
+          sectionPera="Discover the best job opportunities tailored for you."
         />
-        <SkeletonCard />
+        <div >
+          {/* Render multiple skeleton cards to indicate loading */}
+          {[...Array(2)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
       </div>
     );
   }
 
-  // const jobs = await jobsDataLoad();
   return (
     <div className="px-8 md:px-24 py-10 space-y-4">
       <SectionHeader
         sectionHeader="Future Jobs"
-        sectionPera="Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, mollitia."
+        sectionPera="Discover the best job opportunities tailored for you."
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
-        {jobs.map((job) => (
-          <JobCard job={job} key={job._id} />
-        ))}
-      </div>
-      <div className="text-center">
-        {/* <button
-          onClick={() => setDataLength(jobs.length)}
-          className={
-            dataLength === jobs.length
-              ? "hidden"
-              : "btn  outline text-slate-800"
-          }
-          // className="btn  outline text-slate-800"
-        >
-          {" "}
-          see all jobs
-        </button> */}
-      </div>
+      {jobs.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
+          {jobs.map((job) => (
+            <JobCard job={job} key={job._id} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500">No jobs found. Please check back later.</p>
+      )}
     </div>
   );
 };

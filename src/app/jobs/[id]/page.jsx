@@ -5,7 +5,7 @@ import { saveJobApplication } from "@/app/utility/localStorage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { AiOutlineDollar } from "react-icons/ai";
+import { AiOutlineDollar, AiOutlineMail, AiOutlinePhone, AiOutlineHome } from "react-icons/ai";
 import { Bounce, toast } from "react-toastify";
 
 const JobDetails = ({ params }) => {
@@ -33,31 +33,13 @@ const JobDetails = ({ params }) => {
     fetchJobDetails();
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="py-24 p-16">
-        <div className="py-4 rounded shadow-lg w-full px-12 animate-pulse dark:bg-gray-50">
-          <div className="flex p-4 space-x-4 sm:px-8">
-            <div className="flex-shrink-0 w-36 h-36 rounded-full dark:bg-gray-300"></div>
-            <div className="flex-1 py-2 space-y-4">
-              <div className="w-full h-12 rounded dark:bg-gray-300"></div>
-              <div className="w-5/6 h-8 rounded dark:bg-gray-300"></div>
-            </div>
-          </div>
-          <div className="p-4 space-y-4 sm:px-8">
-            <div className="w-full h-6 rounded dark:bg-gray-300"></div>
-            <div className="w-full h-4 rounded dark:bg-gray-300"></div>
-            <div className="w-full h-4 rounded dark:bg-gray-300"></div>
-            <div className="w-3/4 h-4 rounded dark:bg-gray-300"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // if (!job) {
-  //   return <p>Job details not found.</p>;
+  // if (loading) {
+  //   return <h2>hello </h2>;
   // }
+
+  if (!job) {
+    return <p className="text-center text-gray-500">Job details not found.</p>;
+  }
 
   const {
     _id,
@@ -78,135 +60,117 @@ const JobDetails = ({ params }) => {
   };
 
   return (
-    <div className="px-6 py-4 lg:px-24 md:py-8">
-      <nav
-        aria-label="breadcrumb"
-        className="w-full p-4 dark:bg-gray-100 dark:text-gray-800"
-      >
+    <div className="px-6 py-6 lg:px-24 md:py-10">
+      {/* Breadcrumb Navigation */}
+      <nav className="w-full p-4 dark:bg-gray-100 dark:text-gray-800">
         <ol className="flex h-8 space-x-2">
-          <li className="flex items-center">
-            <Link href="/" title="Back to homepage" className="hover:underline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-5 h-5 pr-1 dark:text-gray-600"
-              >
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-              </svg>
+          <li>
+            <Link href="/" className="hover:underline text-blue-600">
+              Home
             </Link>
           </li>
-          <li className="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current"
-            >
-              <path d="M32 30.031h-32l16-28.061z"></path>
-            </svg>
-            <Link
-              href="/jobs"
-              className="flex items-center px-1 capitalize hover:underline"
-            >
+          <li> / </li>
+          <li>
+            <Link href="/jobs" className="hover:underline text-blue-600">
               Jobs
             </Link>
           </li>
-          <li className="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              fill="currentColor"
-              className="w-2 h-2 mt-1 transform rotate-90 fill-current"
-            >
-              <path d="M32 30.031h-32l16-28.061z"></path>
-            </svg>
-            <span className="flex items-center px-1 capitalize cursor-default">
-              Job Details
-            </span>
-          </li>
+          <li> / </li>
+          <li className="text-gray-500">Job Details</li>
         </ol>
       </nav>
 
-      <div className="grid items-center gap-4 md:grid-cols-4">
-        <div className="col-span-3 p-4">
+      {/* Job Details Section */}
+      <div className="grid items-start gap-6 md:grid-cols-4">
+        {/* Left Section - Job Info */}
+        <div className="col-span-3 p-6 bg-white rounded-lg shadow-md">
+          <div className="flex items-center gap-6 mb-6">
+            {/* Company Logo */}
+            <img
+              className="w-24 h-24 object-cover rounded-full border"
+              src={imageUrl || "/default-logo.png"}
+              alt={company_name}
+            />
+            <div>
+              <h2 className="text-2xl font-semibold">{company_name}</h2>
+              <p className="text-gray-600">{job_title}</p>
+            </div>
+          </div>
+
+          {/* Job Details */}
           <div className="space-y-6">
-            <div className="flex gap-4 items-center shadow p-10 border-sm">
-              <img className="w-1/4" src={imageUrl} alt={company_name} />
-              <div>
-                <h2 className="text-xl font-bold">{company_name}</h2>
-              </div>
+            <div>
+              <h3 className="font-bold text-lg">Job Description:</h3>
+              <p className="text-gray-700">{job_description}</p>
             </div>
             <div>
-              <h3 className="font-bold">Job Description:</h3> {job_description}
+              <h3 className="font-bold text-lg">Job Responsibility:</h3>
+              <ul className="list-disc list-inside text-gray-700">
+                {job_responsibility.split("\n").map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
             </div>
             <div>
-              <h3 className="font-bold">Job Responsibility:</h3>{" "}
-              {job_responsibility}
+              <h3 className="font-bold text-lg">Educational Requirements:</h3>
+              <p className="text-gray-700">{educational_requirements}</p>
             </div>
             <div>
-              <h3 className="font-bold">Educational Requirements:</h3>{" "}
-              {educational_requirements}
-            </div>
-            <div>
-              <h3 className="font-bold">Experiences:</h3> {experiences}
+              <h3 className="font-bold text-lg">Experiences:</h3>
+              <p className="text-gray-700">{experiences}</p>
             </div>
           </div>
         </div>
 
-        <div className="border col-span-3 md:col-span-1 p-4 bg-blue-200">
-          <div className="space-y-2">
-            <div className="border-b border-blue-500 py-2">
-              <h3 className="font-bold text-md">Job Details:</h3>
-            </div>
-            <div className="flex items-center gap-1">
-              <AiOutlineDollar />
-              <h3>
-                <span className="font-bold">Salary:</span> {salary}
-              </h3>
-            </div>
-            <div className="flex items-center gap-1">
-              <AiOutlineDollar />
-              <h3>
-                <span className="font-bold">Job Title:</span> {job_title}
-              </h3>
+        {/* Right Section - Job Details & Contact Info */}
+        <div className="col-span-1 p-6 bg-white rounded-lg shadow-md">
+          <div className="mb-4">
+            <h3 className="font-bold text-lg border-b pb-2">Job Details:</h3>
+            <div className="mt-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <AiOutlineDollar className="text-blue-600" />
+                <span className="font-medium">Salary:</span> {salary}
+              </div>
+              <div className="flex items-center gap-2">
+                <AiOutlineDollar className="text-blue-600" />
+                <span className="font-medium">Job Type:</span> {job.job_type}
+              </div>
+              <div className="flex items-center gap-2">
+                <AiOutlineDollar className="text-blue-600" />
+                <span className="font-medium">Location:</span> {job.location}
+              </div>
             </div>
           </div>
 
-          <div className="space-y-2 p-4">
-            <div className="border-b border-blue-500 py-2">
-              <h3 className="font-bold text-md">Contact Information:</h3>
+          <div>
+            <h3 className="font-bold text-lg border-b pb-2">Contact Information:</h3>
+            <div className="mt-4 space-y-3">
+              {contact_information?.phone && (
+                <div className="flex items-center gap-2">
+                  <AiOutlinePhone className="text-blue-600" />
+                  <span>{contact_information.phone}</span>
+                </div>
+              )}
+              {contact_information?.email && (
+                <div className="flex items-center gap-2">
+                  <AiOutlineMail className="text-blue-600" />
+                  <span>{contact_information.email}</span>
+                </div>
+              )}
+              {contact_information?.address && (
+                <div className="flex items-center gap-2">
+                  <AiOutlineHome className="text-blue-600" />
+                  <span>{contact_information.address}</span>
+                </div>
+              )}
             </div>
-            {contact_information?.phone && (
-              <div className="flex items-center gap-1">
-                <AiOutlineDollar />
-                <h3>
-                  <span className="font-bold">Phone:</span>{" "}
-                  {contact_information.phone}
-                </h3>
-              </div>
-            )}
-            {contact_information?.email && (
-              <div className="flex items-center gap-1">
-                <AiOutlineDollar />
-                <h3>
-                  <span className="font-bold">Email:</span>{" "}
-                  {contact_information.email}
-                </h3>
-              </div>
-            )}
-            {contact_information?.address && (
-              <div className="flex items-center gap-1">
-                <AiOutlineDollar />
-                <h3>
-                  <span className="font-bold">Address:</span>{" "}
-                  {contact_information.address}
-                </h3>
-              </div>
-            )}
           </div>
-          <button className="btn w-full btn-primary" onClick={handleApplyJob}>
-            Apply
+
+          <button
+            className="btn w-full mt-6 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+            onClick={handleApplyJob}
+          >
+            Apply Now
           </button>
         </div>
       </div>

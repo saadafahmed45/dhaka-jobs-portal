@@ -69,7 +69,7 @@ export default function Home() {
         handleSearch={handleSearch}
         onSearchClick={onSearchClick}
       />
-      <FindJob jobs={filteredJobs} /> {/* Pass filtered jobs to display */}
+      <FindJob jobs={filteredJobs} />
       <CatagoryList />
     </div>
   );
