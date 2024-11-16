@@ -1,10 +1,11 @@
 // "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineDollar } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { MdOutlineAccessTime } from "react-icons/md";
 import Link from "next/link";
+import { MainContext } from "../Context/Contex";
 
 const JobCard = ({ job }) => {
   const {
@@ -84,6 +85,7 @@ const JobCard = ({ job }) => {
         >
           Apply Now
         </Link>
+
       </div>
     </div>
   );

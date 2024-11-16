@@ -8,7 +8,7 @@ const Hero = () => {
   }, []);
   return (
     <div className="">
-      <div className="container md:px-24 px-8 py-24 mx-auto">
+      <div className=" md:px-24 px-8 py-24 mx-auto">
         <div className="items-center lg:flex">
           <div className="w-full lg:w-1/2" data-aos="fade-up">
             <div className="lg:max-w-md">

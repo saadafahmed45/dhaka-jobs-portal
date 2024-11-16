@@ -1,11 +1,12 @@
 "use client";
 import { SearchIcon } from "lucide-react";
+import { MainContext } from "../Context/Contex";
+import { useContext } from "react";
 
-export default function SearchJobs({ quary, handleSearch, onSearchClick }) {
-  const handleChange = (e) => {
-    handleSearch(e);
-  };
+export default function SearchJobs() {
 
+  const { handleSearch, handleChange, quary, onSearchClick, filteredJobs } =
+    useContext(MainContext);
   return (
     <section className="bg-gradient-to-r from-blue-500 to-indigo-600 py-24">
       <div className="container mx-auto px-4">
@@ -58,7 +59,7 @@ export default function SearchJobs({ quary, handleSearch, onSearchClick }) {
               <select
                 id="job-type"
                 onChange={handleChange}
-                value={quary.jobType}
+                defaultValue={quary.jobType}
                 name="jobType"
                 className="w-full px-4 py-2 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
               >
