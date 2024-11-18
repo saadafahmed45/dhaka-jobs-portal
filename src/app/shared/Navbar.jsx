@@ -142,7 +142,7 @@ function Navbar() {
                     </h3>
                   </button>
                 </div> : <Link
-                  href={"/postJobs"}
+                  href={"/login"}
                   className="px-5 py-2 mx-3 mt-2 text-gray-900 transition-colors duration-300 transform rounded-md lg:mt-0 border hover:text-white  bg-white  hover:bg-blue-700 "
                 >
                   Sign In

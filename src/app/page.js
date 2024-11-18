@@ -7,6 +7,7 @@ import CatagoryList from "./components/CatagoryList";
 import { MainContext } from "./Context/Contex";
 import Hero from "./components/Hero";
 import Jobs from "./jobs/page";
+import ReviewPage from "./components/Review";
 
 export default function Home() {
   const { handleSearch, quary, onSearchClick, filteredJobs } =
@@ -14,10 +15,11 @@ export default function Home() {
   return (
     <div>
       <Hero />
+      <CatagoryList />
       <Jobs />
+      <ReviewPage />
       {/* <SearchJobs /> */}
       {/* <FindJob /> */}
-      <CatagoryList />
     </div>
   );
 }
