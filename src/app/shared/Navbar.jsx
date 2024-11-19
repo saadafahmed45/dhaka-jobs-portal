@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { MainContext } from "../Context/Contex";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -9,7 +10,9 @@ function Navbar() {
     console.log("click the nav");
   };
 
-  const [user, setUser] = useState(false)
+  // const [user, setUser] = useState(false)
+
+  const { user } = useContext(MainContext)
   return (
     <div>
       <nav
@@ -103,7 +106,7 @@ function Navbar() {
               </div>
 
               {
-                user == true ? <div className="flex items-center mt-4 lg:mt-0">
+                user?.emailVerified == true ? <div className="flex items-center mt-4 lg:mt-0">
                   <button
                     className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block  hover:text-gray-800 dark:hover:text-gray-400 focus:text-gray-800 dark:focus:text-gray-400 focus:outline-none"
                     aria-label="show notifications"
@@ -131,7 +134,7 @@ function Navbar() {
                   >
                     <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                       <img
-                        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                        src={user.photoURL}
                         className="object-cover w-full h-full"
                         alt="avatar"
                       />

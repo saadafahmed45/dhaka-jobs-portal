@@ -106,6 +106,7 @@ export const ContextProvider = ({ children }) => {
         filteredJobs,
         handleChange,
         handleGoogleSignIn,
+        user,
       }}
     >
       {children}

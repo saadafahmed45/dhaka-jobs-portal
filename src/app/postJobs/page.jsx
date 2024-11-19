@@ -1,27 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SectionHeader from "../components/SectionHeader";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { MainContext } from "../Context/Contex";
 
 const PostJobs = () => {
+  const { user } = useContext(MainContext)
+
   const { register, handleSubmit } = useForm();
-  const [user, setUser] = useState(true); // Simulate user state (replace with actual auth check)
+  // const [user, setUser] = useState(false); // Simulate user state (replace with actual auth check)
   const router = useRouter(); // Initialize router for redirection
 
+
+  useEffect(() => {
+    if (!user?.emailVerified) {
+      router.push("/login"); // Redirect to login if user is not verified
+    }
+  }, [user, router]); // Dependency array ensures this runs when `user` or `router` changes
+
+  // If the user is not verified, show a loader or return null to avoid rendering this component
+  if (!user?.emailVerified) {
+    return null; // Or add a spinner/loading state if desired
+  }
   const imgbbApiKey = "7460ef8f44862495daa7f95295c4edcf";
   const imageHostingApi = `https://api.imgbb.com/1/upload/key=7460ef8f44862495daa7f95295c4edcf`;
 
   // Function to handle form submission
   const onSubmit = async (data) => {
 
-    if (!user) {
-      // If the user is not logged in, redirect to login page
-      router.push("/login"); // Assuming '/login' is your login page route
-      return;
-    }
+
     // Convert minSalary and maxSalary to a single salary range field
     const salaryRange = `${data.minSalary}-${data.maxSalary}`;
 
@@ -30,6 +40,8 @@ const PostJobs = () => {
     const jobData = {
       ...rest,
       salary: salaryRange, // Add the combined salary range
+      job_posted_name: user.displayName,
+      job_posted_email: user.email,
     };
 
     console.log(jobData);

@@ -1,8 +1,18 @@
 'use client'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { MainContext } from '../Context/Contex'
+import { useRouter } from 'next/navigation'
 
 const LoginPage = () => {
+
+    const { user } = useContext(MainContext)
+    const router = useRouter(); // Initialize router for redirection
+
+    useEffect(() => {
+        if (user?.emailVerified) {
+            router.push("/postJobs"); // Assuming '/login' is your login page route
+        }
+    }, [user, router]); // Dependency array ensures this runs when `user` or `router` changes
 
     const { handleGoogleSignIn } = useContext(MainContext)
     return (
