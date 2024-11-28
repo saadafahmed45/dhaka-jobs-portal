@@ -94,7 +94,7 @@ const PostJobs = () => {
   };
 
   return (
-    <div className="px-4 lg:px-24 py-8">
+    <div className="px-4 lg:px-24 py-8 min-h-screen">
       <div>
         <SectionHeader sectionHeader={"Post a job"} />
       </div>

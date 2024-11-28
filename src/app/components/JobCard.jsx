@@ -6,6 +6,7 @@ import { BsBookmark } from "react-icons/bs";
 import { MdOutlineAccessTime } from "react-icons/md";
 import Link from "next/link";
 import { MainContext } from "../Context/Contex";
+import Image from "next/image";
 
 const JobCard = ({ job }) => {
   const {
@@ -26,7 +27,9 @@ const JobCard = ({ job }) => {
     <div className="shadow-lg p-6 border rounded-xl hover:shadow-2xl transition-shadow duration-300 bg-white">
       {/* Company Logo and Name */}
       <div className="flex items-start gap-4 mb-4">
-        <img
+        <Image
+          width={100}
+          height={100}
           className="h-16 w-16 rounded-lg object-cover"
           src={imageUrl}
           alt={company_name}
