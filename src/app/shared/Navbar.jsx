@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { MainContext } from "../Context/Contex";
+import { useRouter } from "next/navigation";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -10,6 +11,10 @@ function Navbar() {
     console.log("click the nav");
   };
 
+  const router = useRouter();
+  const profileClick = () => {
+    router.push("/profile");
+  }
   // const [user, setUser] = useState(false)
 
   const { user } = useContext(MainContext)
@@ -73,7 +78,7 @@ function Navbar() {
             </div>
             <div
               className={`${open == true
-                ? "translate-x-0 opacity-100 absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
+                ? "translate-x-0 opacity-100 absolute inset-x-0 z-20 w-full px-6 py-6 transition-all duration-300 ease-in-out bg-white  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
                 : "opacity-0 -translate-x-full absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white  lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center"
                 }`}
             >
@@ -85,6 +90,7 @@ function Navbar() {
                 >
                   Home
                 </Link>
+
                 <Link
                   href={"/find-job"}
                   className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
@@ -92,11 +98,20 @@ function Navbar() {
                   Find Work
                 </Link>
                 <Link
-                  href={"/appliedJobs"}
+                  href={"/job-manage"}
                   className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
                 >
-                  Applied Jobs
+                  Find Work
                 </Link>
+                {
+                  user.emailVerified === true && <Link
+                    href={"/appliedJobs"}
+                    className="px-3 py-2 mx-3 mt-2 text-gray-800 transition-colors duration-300 transform rounded-md lg:mt-0  hover:bg-gray-100 "
+                  >
+                    Applied Jobs
+                  </Link>
+                }
+
                 {/* <Link
                   href={"/postJobs"}
                   className="px-3 py-2 mx-3 mt-2 text-white transition-colors duration-300 transform rounded-md lg:mt-0 bg-blue-600  hover:bg-blue-700 "
@@ -109,7 +124,7 @@ function Navbar() {
                 user?.emailVerified == true ? <div className="flex items-center mt-4 lg:mt-0">
                   <button
                     className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block  hover:text-gray-800 dark:hover:text-gray-400 focus:text-gray-800 dark:focus:text-gray-400 focus:outline-none"
-                    aria-label="show notifications"
+                    aria-label="show notifications "
                   >
                     <svg
                       className="w-6 h-6"
@@ -128,8 +143,9 @@ function Navbar() {
                   </button>
 
                   <button
-                    type="button"
-                    className="flex items-center focus:outline-none"
+
+                    onClick={profileClick}
+                    className="md:flex items-center focus:outline-none hidden"
                     aria-label="toggle profile dropdown"
                   >
                     <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
@@ -140,9 +156,7 @@ function Navbar() {
                       />
                     </div>
 
-                    <h3 className="mx-2 text-gray-800  lg:hidden">
-                      Khatab wedaadfds
-                    </h3>
+
                   </button>
                 </div> : <Link
                   href={"/login"}

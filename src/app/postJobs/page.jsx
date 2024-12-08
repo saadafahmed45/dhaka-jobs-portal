@@ -10,7 +10,7 @@ import { MainContext } from "../Context/Contex";
 const PostJobs = () => {
   const { user } = useContext(MainContext)
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   // const [user, setUser] = useState(false); // Simulate user state (replace with actual auth check)
   const router = useRouter(); // Initialize router for redirection
 
@@ -78,10 +78,12 @@ const PostJobs = () => {
         if (response.data.insertedId) {
           Swal.fire({
             title: "Your Job is Posted!",
-            // text: "You clicked the button!",
             icon: "success",
           });
+
+          reset(); // Reset the form fields
         }
+
       })
       .catch((error) => {
         console.error("Error adding job:", error);
