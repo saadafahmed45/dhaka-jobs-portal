@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader";
 const CatagoryList = () => {
   return (
     <div>
-      <section className="text-gray-600  body-font md:px-16 px-2">
+      <section className="text-gray-600 lg:py-12  body-font md:px-16 px-2">
         <div className="container px-5 py-18 mx-auto space-y-4">
           <SectionHeader
             sectionHeader="Popular Categories"

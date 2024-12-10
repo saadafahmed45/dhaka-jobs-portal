@@ -8,6 +8,7 @@ import { MainContext } from "./Context/Contex";
 import Hero from "./components/Hero";
 import Jobs from "./jobs/page";
 import ReviewPage from "./components/Review";
+import JobIdea from "./components/JobIdea";
 
 export default function Home() {
   const { handleSearch, quary, onSearchClick, filteredJobs } =
@@ -18,6 +19,7 @@ export default function Home() {
       <CatagoryList />
       <Jobs />
       <ReviewPage />
+      {/* <JobIdea /> */}
       {/* <SearchJobs /> */}
       {/* <FindJob /> */}
     </div>
