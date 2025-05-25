@@ -33,7 +33,7 @@ const FindJob = () => {
   // }
 
   return (
-    <div className="px-8 md:px-24 py-10 space-y-4">
+    <div className="  space-y-4">
       {/* <SectionHeader
         sectionHeader="Find Jobs"
         sectionPera="To choose your trending job dream & to make future bright."
@@ -45,7 +45,7 @@ const FindJob = () => {
           <h2 >No jobs available at the moment. Please check back later."</h2>
         </div>
       }
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center gap-4">
+      <div className="px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center gap-4">
         {jobs.map((job) => (
           <JobCard job={job} key={job._id} />
         ))}

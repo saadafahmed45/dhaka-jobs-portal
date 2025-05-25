@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import the AOS styles
+import Link from "next/link";
 const Hero = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Initialize AOS with duration
@@ -23,7 +24,9 @@ const Hero = () => {
               </p>
 
               <button className="w-1/2 px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                Find Job
+                <Link href={'find-jobs'}>
+                  Find Job
+                </Link>
               </button>
             </div>
           </div>
