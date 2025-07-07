@@ -27,7 +27,7 @@ const FutureJob = () => {
           <Job job={job} key={job.id} />
         ))}
       </div>
-      <div className="text-center ">
+      <div className="text-center  ">
         <button
           onClick={() => setDataLength(jobs.length)}
           className={
@@ -35,7 +35,7 @@ const FutureJob = () => {
               ? "hidden"
               : "btn  outline text-slate-800"
           }
-          // className="btn  outline text-slate-800"
+        // className="btn  outline text-slate-800"
         >
           {" "}
           see all jobs
